@@ -4254,3 +4254,18 @@ body.is-preload #banner p {
     padding: 2em 1.5em 0.1em 1.5em;
   }
 }
+
+.social-link {
+  border: 1px solid white;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 16px;
+}
+
+.flex-row {
+  display: flex;
+}
