@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Meetup OAuth Callback</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .code-box { 
+            background: #f0f0f0; 
+            padding: 15px; 
+            border: 1px solid #ccc; 
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        .success { color: #28a745; }
+        .error { color: #dc3545; }
+    </style>
+</head>
+<body>
+    <h1>Meetup OAuth Authorization</h1>
+    <div id="result"></div>
+    
+    <script>
+        const urlParams = new URLSKee�chParams(window.location.search);
+        const code = urlParams.get('code');
+        const error = urlParams.get('error');
+        const resultDiv = document.getElementById('result');
+        
+        if (error) {
+            resultDiv.innerHTML = `
+                <div class="error">
+                    <h2>❌🚫 Authorization Failed</h2>
+                    <p>Error: ${error}</p>
+                    <p>Description: ${urlParams.get('error_description') || 'No description provided'}</p>
+                </div>
+            `;
+        } else if (code) {
+            resultDiv.innerHTML = `
+                <div class="success">
+                    <h2>✅ Authorization Successful!</h2>
+                    <p>Copy this authorization code and send it to AIdan:</p>
+                    <div class="code-box" onclick="selectText(this)">${code}</div>
+                    <p><small>Click the code above to select it for easy copying</small></p>
+                </div>
+            `;
+        } else {
+            resultDiv.innerHTML = `
+                <div class="error">
+                    <h2>❓ No Authorization Code</h2>
+                    <p>No authorization code was found in the URL parameters.</p>
+                </div>
+            `;
+        }
+        
+        function selectText(element) {
+            const range = document.createRange();
+            range.selectNode(element);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+        }
+    </script>
+</body>
+</html>
